@@ -1,0 +1,34 @@
+<!doctype html>
+<head>
+    <title>Upload new File</title>
+</head>
+<body>
+  {% for message in get_flashed_messages() %}
+  <div class="flash">{{ message }}</div>
+  {% endfor %}
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data action="{{ url_for('uploadfile') }}">
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+
+  {% if imagenes: %}
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Imagen</th>
+        <th>Ubicación</th>
+      </tr>
+      {% for i in imagenes: %}
+        <tr>
+          <!--i[0]: id, i[1]:imagen blob, i[2]:ruta imagen-->
+          <td>{{i[0]}}</td>
+          <td><img src="data:;base64,{{i[1]}}"/></td>
+          <td><a href='{{i[2]}}'>{{i[2]}}</a></td>
+
+          
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+</body>
